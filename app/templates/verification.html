@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clearance Verification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .card {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .school-details {
+      text-align: left;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .school-details p {
+      margin: 5px 0;
+    }
+
+    .count-box {
+      background: #eef6ff;
+      border: 1px solid #007bff;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+
+    .count-box h3 {
+      margin: 0;
+      color: #007bff;
+      font-size: 22px;
+    }
+
+    .qr-box {
+      margin: 20px 0;
+    }
+
+    .qr-box img {
+      width: 160px;
+      height: 160px;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <h2>WASSCE Clearance Verification</h2>
+    <p>Scan to verify candidate clearance list</p>
+
+    <div class="school-details">
+      <p><strong>School Name:</strong> {{ school_name }}</p>
+      <p><strong>School Code:</strong> {{ school_code }}</p>
+      <p><strong>Principal:</strong> {{ principal }}</p>
+    </div>
+
+    <div class="count-box">
+      <p>
+        <strong>Total Recommended Candidates:</strong>
+        {{ recommended_count }}
+      </p>
+    </div>
+
+    <div class="qr-box">
+      <!-- QR CODE IMAGE -->
+      <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" />
+
+    </div>
+
+
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Upload CSV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        font-family: "Poppins", Arial, sans-serif;
+        background: #f4f6f9;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+
+      .upload-card {
+        background: #ffffff;
+        padding: 30px 40px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      h2 {
+        color: #2c3e50;
+      }
+
+      p {
+        font-size: 14px;
+        color: #555;
+      }
+
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px dashed #ccc;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        cursor: pointer;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background-color: #007bff;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .success {
+        color: #28a745;
+        font-weight: bold;
+        margin-top: 15px;
+        display: none;
+      }
+
+      .action-buttons {
+        display: none;
+        margin-top: 20px;
+      }
+
+      .btn-green {
+        background-color: #28a745;
+      }
+
+      .btn-dark {
+        background-color: #343a40;
+      }
+
+      .footer-text {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #888;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="upload-card">
+      <h2>Upload CSV File</h2>
+      <p>Please upload the approved clearance CSV file</p>
+
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required />
+        <button type="submit">Upload CSV</button>
+      </form>
+
+      <!-- ✅ SUCCESS MESSAGE -->
+      <div id="successMsg" class="success">
+        ✔ Upload successful
+      </div>
+
+      <!-- ✅ ACTION BUTTONS -->
+      <div id="actionButtons" class="action-buttons">
+        <button
+          id="openIndex"
+          type="button"
+          class="btn-dark"
+        >
+          Open Clearance List
+        </button>
+
+        <button
+          id="openVerify"
+          type="button"
+          class="btn-green"
+        >
+          Open Verification Slip
+        </button>
+      </div>
+
+      <div class="footer-text">
+        Ministry of Education • Clearance Portal
+      </div>
+    </div>
+
+<script>
+  const form = document.getElementById("uploadForm");
+  const successMsg = document.getElementById("successMsg");
+  const actionButtons = document.getElementById("actionButtons");
+  const openIndexBtn = document.getElementById("openIndex");
+  const openVerifyBtn = document.getElementById("openVerify");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+      const formData = new FormData(form);
+
+      const response = await fetch("/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error("Upload failed: " + response.status);
+      }
+
+      const data = await response.json();
+      console.log("Server response:", data);
+
+      // ✅ Show success
+      successMsg.style.display = "block";
+      actionButtons.style.display = "block";
+
+      // ✅ Attach buttons
+      openIndexBtn.onclick = () =>
+        window.open(data.index_url, "_blank");
+
+      openVerifyBtn.onclick = () =>
+        window.open(data.verify_url, "_blank");
+
+    } catch (error) {
+      alert("ERROR: " + error.message);
+      console.error(error);
+    }
+  });
+</script>
+
+
+  </body>
+</html>
+
+
