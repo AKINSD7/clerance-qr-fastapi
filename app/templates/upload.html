@@ -123,51 +123,38 @@
       </div>
     </div>
 
-<script>
-  const form = document.getElementById("uploadForm");
-  const successMsg = document.getElementById("successMsg");
-  const actionButtons = document.getElementById("actionButtons");
-  const openIndexBtn = document.getElementById("openIndex");
-  const openVerifyBtn = document.getElementById("openVerify");
+    <script>
+      const form = document.getElementById("uploadForm");
+      const successMsg = document.getElementById("successMsg");
+      const actionButtons = document.getElementById("actionButtons");
+      const openIndexBtn = document.getElementById("openIndex");
+      const openVerifyBtn = document.getElementById("openVerify");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    try {
-      const formData = new FormData(form);
+        const formData = new FormData(form);
 
-      const response = await fetch("/upload", {
-        method: "POST",
-        body: formData
+        const response = await fetch("/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        // ✅ Show success message
+        successMsg.style.display = "block";
+
+        // ✅ Show buttons
+        actionButtons.style.display = "block";
+
+        // ✅ Attach URLs
+        openIndexBtn.onclick = () =>
+          window.open(data.index_url, "_blank");
+
+        openVerifyBtn.onclick = () =>
+          window.open(data.verify_url, "_blank");
       });
-
-      if (!response.ok) {
-        throw new Error("Upload failed: " + response.status);
-      }
-
-      const data = await response.json();
-      console.log("Server response:", data);
-
-      // ✅ Show success
-      successMsg.style.display = "block";
-      actionButtons.style.display = "block";
-
-      // ✅ Attach buttons
-      openIndexBtn.onclick = () =>
-        window.open(data.index_url, "_blank");
-
-      openVerifyBtn.onclick = () =>
-        window.open(data.verify_url, "_blank");
-
-    } catch (error) {
-      alert("ERROR: " + error.message);
-      console.error(error);
-    }
-  });
-</script>
-
-
+    </script>
   </body>
 </html>
-
-

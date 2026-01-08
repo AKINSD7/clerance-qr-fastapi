@@ -2,27 +2,32 @@
 
 <html class="fa-events-icons-ready" data-qb-installed="true">
   <head>
-    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <!-- Styles -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='css/style.css') }}"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="{{ url_for('static', path='assets/images/favicon.ico') }}"
+      type="image/ico"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', path='assets/images/favicon.ico') }}"
+      type="image/ico"
+    />
 
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    />
-
-    <meta
-      name="csrf-token"
-      content="NfZZdcIHDFSPrI1YyBJ215pEmbASagxBwo0Ux8Wv"
-    />
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WAEC 2025/2026 Clearance List</title>
   </head>
 
   <body data-new-gr-c-s-check-loaded="14.1267.0" data-gr-ext-installed="">
-    <img src="" width="100">
+    <img src="" width="100" />
 
-    
     <div class="card">
       <div id="watermark" class="watermark">DIPER</div>
       <div class="container-fluid">
@@ -46,7 +51,9 @@
               <p class="text-left">
                 SCHOOL NAME: <strong>{{ school_name }}</strong>
               </p>
-              <p class="text-left">SCHOOL CODE: <strong>{{ school_code }}</strong></p>
+              <p class="text-left">
+                SCHOOL CODE: <strong>{{ school_code }}</strong>
+              </p>
               <p class="text-left">
                 NAME OF PRINCIPAL: <strong>{{ principal }}</strong>
               </p>
@@ -80,7 +87,7 @@
                   <td>{{ loop.index }}</td>
                   <td>
                     <!-- <img src="https://ik.imagekit.io/edx82gwzy/istockphoto-1332100919-612x612.jpg?updatedAt=1710424155848" alt="Resource Not Available" width="40" height="40"></td> -->
-                    <img src="{{ row.passport }}" width="40" height="40">
+                    <img src="{{ row.passport }}" width="40" height="40" />
                   </td>
                   <td>{{ row.lin }}</td>
                   <td>{{ row.lastname }}</td>
@@ -99,9 +106,5 @@
         </div>
       </div>
     </div>
-
   </body>
-
 </html>
-
-
